@@ -3,39 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Do It Now</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Advanced To-Do List</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
 </head>
+
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-tasks"></i> Do It Now.</h1>
-            <p>Organize and complete your tasks efficiently.</p>
+            <div class="header-content">
+                <h1><i class="fas fa-tasks"></i>done & done</h1>
+                <p>Organize your tasks with priority, difficulty and time estimates</p>
+            </div>
+            <div class="stats">
+                <span id="taskCount">0 tasks</span>
+            </div>
         </header>
-
+        
         <div class="app-container">
-            <div class="input-container">
-                <input type="text" id="taskInput" placeholder="Add a new task...">
-                <button id="addTaskBtn"><i class="fas fa-plus"></i> Add</button>
+            <div class="input-section">
+                <h2><i class="fas fa-plus-circle"></i> Add New Task</h2>
+                
+                <div class="input-group">
+                    <label for="taskInput">Task Description</label>
+                    <input type="text" id="taskInput" placeholder="What needs to be done?">
+                </div>
+                
+                <div class="input-group">
+                    <label for="taskDifficulty">Difficulty Level</label>
+                    <select id="taskDifficulty">
+                        <option value="easy">Easy</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="taskTime">Estimated Time (minutes)</label>
+                    <input type="number" id="taskTime" min="1" max="600" value="30">
+                </div>
+                
+                <div class="input-group">
+                    <label for="taskPriority">Priority Level (1-5)</label>
+                    <input type="range" id="taskPriority" min="1" max="5" value="3">
+                    <div class="priority-display">
+                        <span>Low</span>
+                        <span id="priorityValue">3</span>
+                        <span>High</span>
+                    </div>
+                </div>
+                
+                <button id="addTaskBtn"><i class="fas fa-plus"></i> Add Task</button>
             </div>
             
-            <div class="controls">
-                <div class="filter">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="active">Active</button>
-                    <button class="filter-btn" data-filter="completed">Completed</button>
+            <div class="tasks-section">
+                <div class="controls">
+                    <div class="filter">
+                        <button class="filter-btn active" data-filter="all">
+                            <i class="fas fa-list"></i> All Tasks
+                        </button>
+                        <button class="filter-btn" data-filter="active">
+                            <i class="fas fa-circle-notch"></i> Active
+                        </button>
+                        <button class="filter-btn" data-filter="completed">
+                            <i class="fas fa-check-circle"></i> Completed
+                        </button>
+                    </div>
+                    
+                    <div class="sort-container">
+                        <span class="sort-label">Sort by:</span>
+                        <select id="sortSelect" class="sort-select">
+                            <option value="difficulty-asc">Difficulty (Easy to Hard)</option>
+                            <option value="difficulty-desc">Difficulty (Hard to Easy)</option>
+                            <option value="time-asc">Time (Shortest First)</option>
+                            <option value="time-desc">Time (Longest First)</option>
+                            <option value="priority-asc">Priority (Low to High)</option>
+                            <option value="priority-desc">Priority (High to Low)</option>
+                            <option value="date-asc">Date (Oldest First)</option>
+                            <option value="date-desc">Date (Newest First)</option>
+                        </select>
+                    </div>
+                    
+                    <button id="clearCompleted">
+                        <i class="fas fa-trash-alt"></i> Clear Completed
+                    </button>
                 </div>
-                <div class="stats">
-                    <span id="taskCount">0 tasks</span>
-                    <button id="clearCompleted">Clear Completed</button>
+                
+                <div class="tasks-container">
+                    <ul id="taskList">
+                        <!-- Tasks will be added here dynamically -->
+                    </ul>
                 </div>
             </div>
-            
-            <ul id="taskList"></ul>
         </div>
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
